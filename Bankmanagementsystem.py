@@ -73,6 +73,7 @@ class bank():
         print("-" * 30)
         for transaction in self.history:
             print(transaction)
+    
 
     def save_data(self):
         return f"{self.number} {self.name} {self.__balance}\n"
@@ -174,7 +175,24 @@ def transaction():
     reciver=accounts[reciever_accountnumber]
 
     sender.transaction(reciver,amount)
- 
+
+def delete_account():
+        try:
+            number=int(input("enter the account number to delete"))
+            if number<0:
+                print("no negative number")
+                return
+            if number not in accounts:
+                print("Account not found")
+                return
+            del accounts[number]
+        except Exception as e:
+            print("unexpected error",e)
+
+            print("-"*10)
+            print("The account had been deleted")
+            print("-"*10)
+
 def showall():
     for id in accounts:
         value=accounts[id]
@@ -198,7 +216,8 @@ while True:
     print("6.save to accounts")
     print("7.Transaction")
     print("8.Transaction history")
-    print("9.exit")
+    print("9.delete account")
+    print("10.exit")
     ch=int(input("enter the option : "))
     if ch==1:
         add_account()
@@ -218,6 +237,8 @@ while True:
     elif ch==8:
         history()
     elif ch==9:
+        delete_account()
+    elif ch==10:
         break
     else:
         print("invalid option")
